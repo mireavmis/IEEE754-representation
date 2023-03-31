@@ -21,6 +21,7 @@ def main(_a):
         return ans.bin
 
 
+    # if number is negative
     if a.bin[-1] == '1':
         a.reverse()
 
@@ -37,7 +38,6 @@ def main(_a):
         if a.bin[_] == '1':
             i = _
 
-    print(i)
     # truncate
     if (i > 10):
         return "Error"
