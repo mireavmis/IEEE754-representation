@@ -29,7 +29,6 @@ def main(_a):
         a = BitArray(uint=a.uint+1, length=16)
         a[0] = BitArray(bin='0b1')
 
-        print(a.bin)
         a.reverse()
 
     # find last's '1' id
