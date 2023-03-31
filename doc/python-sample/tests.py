@@ -9,11 +9,12 @@ def test_good(a, res):
     assert i3e754.main(a[::-1]) == res
 
 
-def test_error():
-    assert i3e754.main("0001111101000101"[::-1]) == "Error"
+@pytest.mark.parametrize("a, res", [("0001111101000101", "Error"),
+                                    ("1" + "0" * 15, "Error")])
+def test_error(a, res):
+    assert i3e754.main(a[::-1]) == res
 
 
-@pytest.mark.parametrize("a, res", [("0" * 16, "0" * 16),
-                                    ("1" + "0" * 15, "1" + "0" * 15)])
+@pytest.mark.parametrize("a, res", [("0" * 16, "0" * 16)])
 def test_zero(a, res):
     assert i3e754.main(a[::-1]) == res
