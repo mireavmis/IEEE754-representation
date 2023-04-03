@@ -7,7 +7,7 @@ module fsm(
     output reg R_O
 );
 
-parameter S0 = 1,
+parameter S0 = 0,
           S1 = 1,
           S2 = 2,
           S3 = 3,
@@ -68,6 +68,7 @@ always@(posedge clk) begin
         end
         S2: begin
             REG_SIGN = REG_IN[15];
+            REG_TMP  <= REG_IN;
 
             if (REG_SIGN)
                 new_state <= S3;
@@ -75,7 +76,6 @@ always@(posedge clk) begin
                 new_state <= S4;
         end
         S3: begin
-            REG_TMP     = REG_RES;
             REG_TMP     = ~REG_TMP;
             REG_TMP[16] = 0;
             REG_TMP     = REG_TMP + 1;
@@ -89,13 +89,13 @@ always@(posedge clk) begin
                 new_state <= S6;
         end
         S5: begin
-            REG_ERROR = 1;
+            REG_ERROR <= 1;
             
             new_state <= S0;
         end
         S6: begin
             for (i = 0; i < 11; i = i + 1) begin
-                if (REG_TMP[i])
+                if (REG_TMP[i] == 1)
                     point = i;
                 else
                     point = point;
