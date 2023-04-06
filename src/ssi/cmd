@@ -1,0 +1,8 @@
+clk_divider.v
+param_counter.v
+segment_controller.v
+shift_reg.v
+synchronizer.v
+debouncer.v
+ssi.v
+tb_ssi.v
