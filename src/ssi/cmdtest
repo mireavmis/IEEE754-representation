@@ -1,5 +1,0 @@
-test_tb.v
-param_counter.v
-clk_divider.v
-debouncer.v
-synchronizer.v
