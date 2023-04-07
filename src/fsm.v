@@ -64,7 +64,7 @@ always@(posedge clk) begin
             end
         end
         S2: begin
-            REG_SIGN = REG_IN[15-j-1];
+            REG_SIGN = REG_IN[15];
             REG_TMP  <= REG_IN;
 
             if (REG_SIGN)
