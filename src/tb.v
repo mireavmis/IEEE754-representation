@@ -46,6 +46,57 @@ initial begin
     confirm = 1;
 
     #1000;
+
+    reset = 1;
+
+    #700;
+
+    switches = 0;
+    enter = 1;
+
+    #400; enter = 0; #400;
+
+    switches = 1;
+    enter = 1;
+
+    #400; enter = 0; #400;
+
+    switches = 11;
+    enter = 1;
+
+    #400; enter = 0; #400;
+
+    switches = 10;
+    enter = 1;
+
+    #400; enter = 0; confirm = 0; #400;
+
+    confirm = 1;
+
+    #2000;
+
+    switches = 8;
+    enter = 1;
+
+    #400; enter = 0; #400;
+
+    switches = 0;
+    enter = 1;
+
+    #400; enter = 0; #400;
+
+    switches = 0;
+    enter = 1;
+
+    #400; enter = 0; #400;
+
+    switches = 0;
+    enter = 1;
+
+    #400; enter = 0; confirm = 0; #400;
+
+    confirm = 1;
+    #2000;
     $finish;
 
 end
