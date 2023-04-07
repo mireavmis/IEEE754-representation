@@ -3,6 +3,7 @@ module fsm(
     input R_I,
     input reset,
     input clk,
+    output reg REG_ERROR,
     output [15:0] dataOut,
     output reg R_O
 );
@@ -18,18 +19,17 @@ parameter S0 = 0,
 reg [3:0] state;
 reg [15:0] REG_IN, REG_RES;
 reg [16:0] REG_TMP;
-reg REG_ERROR;
 reg REG_SIGN;
 
 integer i, j, point;
 
 initial begin
     state     = S0;
+    REG_ERROR = 0;
     REG_RES   = 0;
     REG_IN    = 0;
     REG_TMP   = 0;
     REG_SIGN  = 0;
-    REG_ERROR = 0;
     i         = 0;
     j         = 0;
     point     = 0;
