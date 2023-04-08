@@ -20,7 +20,6 @@ wire enter_sync_enable,
      confirm_sync_enable;
 
 wire [31:0] numb;
-reg [31:0] REG_NUMB;
 
 reg [31:0] REG_SHOW;
 
@@ -43,7 +42,6 @@ initial begin
     REG_RESET_FSM = 0;
     REG_R_O       = 0;
     REG_R_I       = 0;
-    REG_NUMB      = 0;
     REG_SHOW      = 0;
 
 end
