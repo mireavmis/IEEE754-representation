@@ -133,7 +133,7 @@ debouncer resest_debouncer(
 );
 
 clk_divider #(
-    .DIV(10) // change to 1000
+    .DIV(1000) // change to 1000
 )
 clk_divider_100khz(
     
