@@ -3,7 +3,7 @@ module debouncer (
     output out_signal, output out_signal_enable
     );
 
-    localparam UPPER_BOUND = 512;
+    localparam UPPER_BOUND = 16;
     
     wire rst, tmp;
     

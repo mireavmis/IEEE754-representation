@@ -48,57 +48,54 @@ initial begin
 
 end
 
-// take input
 always@(posedge clk100mhz) begin
-    if (confirm_sync_enable)
-        REG_R_I <= 1;
-    else
-        REG_R_I <= 0;
-end
 
-// control output
-always@(posedge clk100mhz) begin
-    if (R_O) begin
-        REG_SHOW <= 0;
-        REG_R_O <= 1;
-        REG_SHOW[15:0] <= RES;
-    end
-    else if (REG_R_O == 0)
-        REG_SHOW <= REG_NUMB;
-    else
-        REG_SHOW <= REG_SHOW;
-end
-
-// handle ERROR state
-always@(posedge clk100mhz) begin
-    if (ERROR)
-        REG_ERROR <= 1;
-    else
-        REG_ERROR <= REG_ERROR;
-end
-
-
-//handle reset
-always@(posedge clk100mhz) begin
+    // handle reset
     if (reset_sync_enable) begin
-        REG_ERROR     <= 0;
         REG_SHOW      <= 0;
         REG_R_I       <= 0;
         REG_R_O       <= 0;
         REG_RESET_FSM <= 1;
     end
-    else
+    else begin
         REG_RESET_FSM <= 0;
+
+        // handle input
+        if (confirm_sync_enable)
+            REG_R_I <= 1;
+        else
+            REG_R_I <= 0;
+
+        // handle output
+        if (R_O) begin
+            REG_SHOW <= 0;
+            REG_R_O <= 1;
+            REG_SHOW[15:0] <= RES;
+        end
+        else if (REG_R_O == 0)
+            REG_SHOW <= numb;
+        else
+            REG_SHOW <= REG_SHOW;
+    end
 end
 
-always@(posedge clk100mhz)
-    REG_NUMB <= numb;
 
-always@(posedge clk100mhz)
+always@(posedge clk100mhz) begin
     if (REG_R_O)
         REG_MASK <= 8'b11110000;
     else 
         REG_MASK <= MASK;
+end
+
+// handle ERROR
+always@(posedge clk100mhz) begin
+    if (ERROR)
+        REG_ERROR <= 1;
+    else if (reset_sync_enable)
+        REG_ERROR <= 0;
+    else
+        REG_ERROR <= REG_ERROR;
+end
 
 debouncer confirm_debouncer(
     
@@ -133,7 +130,7 @@ debouncer resest_debouncer(
 );
 
 clk_divider #(
-    .DIV(1000) // change to 1000
+    .DIV(10) // change to 1000
 )
 clk_divider_100khz(
     
