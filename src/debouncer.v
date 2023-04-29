@@ -14,7 +14,7 @@ module debouncer (
     reg out_signal_enable_reg = 0;
     
     
-    wire [$clog2(UPPER_BOUND):0] streak;
+    wire [$clog2(UPPER_BOUND)-1:0] streak;
     param_counter #(.UPPER_BOUND(UPPER_BOUND))
         counter(.clk(clk), .rst(rst), .cnt(streak));
     
